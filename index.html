@@ -1,0 +1,379 @@
+<title>Bejuco Pricing Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#FAF8F5; --surface:#FFFFFF; --ink:#221F1C; --ink-2:#6E675E; --ink-3:#948C82;
+  --line:#E4DED5; --line-2:#F0EBE4; --accent:#0F6E6B; --accent-soft:#E3EFEE; --ramp-cool:#0F6E6B; --ramp-warn:#B4483C; --ramp-blue:#2E5AAC; --ramp-good:#2E7D4F; --ramp-settle:#B07A08;
+  --red:#A8332A; --red-bg:#F8E6E3; --amber:#8A6008; --amber-bg:#FAEFD8; --green:#2C6440; --green-bg:#E2EFE5;
+  --tipbg:#221F1C; --tipink:#FAF8F5;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16151A; --surface:#1E1C23; --ink:#EDE9E3; --ink-2:#A79F95; --ink-3:#7C746A;
+  --line:#302D38; --line-2:#262430; --accent:#5FBDB6; --accent-soft:#17332F; --ramp-cool:#4FA9A3; --ramp-warn:#C4655A; --ramp-blue:#7796DC; --ramp-good:#63B583; --ramp-settle:#E4B45A;
+  --red:#F0938A; --red-bg:#3A1F1D; --amber:#E4B45A; --amber-bg:#352A16; --green:#84C79A; --green-bg:#1B3324;
+  --tipbg:#33303B; --tipink:#EDE9E3;
+}}
+:root[data-theme="dark"]{
+  --bg:#16151A; --surface:#1E1C23; --ink:#EDE9E3; --ink-2:#A79F95; --ink-3:#7C746A;
+  --line:#302D38; --line-2:#262430; --accent:#5FBDB6; --accent-soft:#17332F; --ramp-cool:#4FA9A3; --ramp-warn:#C4655A; --ramp-blue:#7796DC; --ramp-good:#63B583; --ramp-settle:#E4B45A;
+  --red:#F0938A; --red-bg:#3A1F1D; --amber:#E4B45A; --amber-bg:#352A16; --green:#84C79A; --green-bg:#1B3324;
+  --tipbg:#33303B; --tipink:#EDE9E3;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;
+  margin:0;padding:clamp(20px,4vw,56px);line-height:1.55;font-size:15px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
+header{display:flex;flex-direction:column;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:18px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500}
+h1{font-size:clamp(28px,4.4vw,40px);font-weight:600;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.sub{color:var(--ink-2);font-size:14px;max-width:66ch}
+.verdict{display:inline-flex;align-self:flex-start;background:var(--accent-soft);color:var(--accent);
+  border-radius:2px;padding:7px 13px;font-size:13px;font-weight:600}
+h2{font-size:19px;font-weight:600;margin:0 0 12px;letter-spacing:-.01em;display:flex;flex-wrap:wrap;align-items:baseline;gap:11px}
+.cs{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);font-weight:400}
+h3{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);margin:0 0 14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-left-width:3px;padding:15px 17px;border-radius:2px}
+.card.red{border-left-color:var(--red)} .card.far{border-left-color:var(--ramp-blue)}
+.ct{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.cv{font-family:"IBM Plex Mono",monospace;font-size:31px;font-weight:600;line-height:1.15;margin:3px 0 6px;font-variant-numeric:tabular-nums}
+.card.red .cv{color:var(--red)} .card.far .cv{color:var(--ramp-blue)}
+.card p{margin:0;font-size:12.5px;color:var(--ink-2)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:2px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:7px 9px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line-2)}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;border-bottom:1px solid var(--line);background:var(--surface);
+  position:relative;cursor:help;outline:none}
+thead th:hover,thead th:focus{color:var(--accent)}
+thead th[data-tip]::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);right:0;z-index:20;
+  width:min(310px,72vw);white-space:normal;text-align:left;background:var(--tipbg);color:var(--tipink);
+  font-family:"IBM Plex Sans",sans-serif;font-size:12px;line-height:1.45;letter-spacing:0;text-transform:none;
+  font-weight:400;padding:9px 11px;border-radius:3px;box-shadow:0 4px 16px rgba(0,0,0,.24);
+  opacity:0;visibility:hidden;transition:opacity .12s}
+thead th[data-tip]:hover::after,thead th[data-tip]:focus::after{opacity:1;visibility:visible}
+thead th.bh[data-tip]::after,thead th.oth[data-tip]::after{right:auto;left:0}
+tbody th{text-align:left;font-weight:500;font-size:13.5px;display:flex;flex-direction:column;gap:1px;min-width:132px}
+.bh{min-width:132px}
+.dates{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);font-weight:400}
+td{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink)}
+td.ramp{background:color-mix(in srgb, var(--ramp,var(--ramp-cool)) var(--t,0%), transparent)}
+.otc{border-right:1px solid var(--line)}
+.pill{display:inline-block;min-width:46px;padding:2px 8px;border-radius:2px;font-weight:600;
+  font-size:12.5px;color:var(--ink);
+  background:color-mix(in srgb, var(--ramp,transparent) var(--t,0%), transparent)}
+.pill.na{background:transparent;color:var(--ink-3);font-weight:400}
+.mk{color:var(--ink-3);font-size:10px;vertical-align:super;font-style:normal}
+.notes{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:19px 21px}
+.notes ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:8px}
+.notes li{font-size:13px;color:var(--ink-2)} .notes strong{color:var(--ink);font-weight:600}
+.setgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:20px}
+.setcard{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:15px 17px}
+.setcard h4{margin:0 0 9px;font-size:13.5px;font-weight:600}
+.setrow{display:flex;justify-content:space-between;gap:12px;font-family:"IBM Plex Mono",monospace;
+  font-size:12.5px;padding:3px 0;border-bottom:1px solid var(--line-2)}
+.setrow:last-of-type{border-bottom:none} .setrow span:first-child{color:var(--ink-2)}
+.rec{color:var(--ink-3);font-size:11px}
+.hitwarn{color:var(--amber);font-weight:600}
+.custom{color:var(--accent)}
+.profs{margin-top:9px;padding-top:8px;border-top:1px solid var(--line-2)}
+.proflabel{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+  font-family:"IBM Plex Mono",monospace;margin-bottom:5px}
+.prof{display:flex;justify-content:space-between;gap:10px;font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px;color:var(--ink-2);padding:2px 0}
+.since{margin-top:11px;font-size:12.5px}
+.since.settling{color:var(--amber);font-weight:600} .since.ok{color:var(--ink-2)}
+.logbox{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:2px 18px}
+.entry{display:grid;grid-template-columns:96px 1fr auto;gap:14px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line-2)}
+.entry:last-child{border-bottom:none}
+.edate{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-2)}
+.eage{display:block;font-size:10.5px;color:var(--ink-3)}
+.ewhat{font-size:13.5px} .emove{font-family:"IBM Plex Mono",monospace;font-weight:600}
+.enote{display:block;font-size:12px;color:var(--ink-2);margin-top:3px}
+.badge{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 7px;border-radius:2px;background:var(--line-2);color:var(--ink-2);white-space:nowrap}
+.badge.settling{background:var(--amber-bg);color:var(--amber)}
+.empty{color:var(--ink-3);font-size:13px;font-style:italic;padding:14px 0}
+.hint{font-size:11.5px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.card{position:relative}
+.card[hidden]{display:none}
+.snz{position:absolute;top:9px;right:9px;background:none;border:1px solid var(--line);
+  color:var(--ink-3);border-radius:2px;cursor:pointer;font-family:"IBM Plex Mono",monospace;
+  font-size:11px;line-height:1;padding:3px 6px}
+.snz:hover,.snz:focus-visible{color:var(--ink);border-color:var(--ink-3);outline:none}
+.snz:focus-visible{box-shadow:0 0 0 2px var(--accent-soft)}
+.card.snoozed{opacity:.62}
+.card .snuntil{display:none;font-size:11.5px;color:var(--ink-3);margin-top:7px;
+  font-family:"IBM Plex Mono",monospace}
+.card.snoozed .snuntil{display:block}
+#snoozebar{display:flex;align-items:center;gap:12px;margin-top:11px;font-size:12px;color:var(--ink-3)}
+#snoozebar button{background:none;border:none;color:var(--accent);cursor:pointer;font:inherit;
+  text-decoration:underline;padding:0}
+#allsnoozed{color:var(--ink-3);font-size:13px;font-style:italic}
+
+@media (max-width:640px){tbody th{min-width:104px} body{font-size:14px}}
+</style>
+<div class="wrap">
+<header>
+<div class="eyebrow">Updated 2026-09-09</div>
+<h1>Bejuco Pricing Review</h1>
+<p class="sub">Forward occupancy for both listings against their competitive sets, across fifteen Samara
+seasons. Full Casa bookings count as booked on both units. Hover any column heading for what it means
+and how it is calculated.</p>
+<div class="verdict">14 buckets pacing behind the market</div>
+</header>
+<section><h3>Needs attention</h3><div class="cards"><article class="card red" data-key="casa|February" data-score="0.0" data-kind="red"><div class="ct">Casa Bejuco · February</div>
+<div class="cv">0.0</div>
+<p>0.0% booked while the market sits at 58% of last year's finish.
+28 of 28 sellable nights still open.
+No booking has ever touched this period.</p></article>
+<article class="card red" data-key="casa|March" data-score="0.0" data-kind="red"><div class="ct">Casa Bejuco · March</div>
+<div class="cv">0.0</div>
+<p>0.0% booked while the market sits at 46% of last year's finish.
+18 of 18 sellable nights still open.
+No booking has ever touched this period.</p></article>
+<article class="card red" data-key="casa|Easter" data-score="0.0" data-kind="red"><div class="ct">Casa Bejuco · Easter</div>
+<div class="cv">0.0</div>
+<p>0.0% booked while the market sits at 29% of last year's finish.
+16 of 16 sellable nights still open.
+No booking has ever touched this period.</p></article>
+<article class="card red" data-key="casa|April" data-score="0.0" data-kind="red"><div class="ct">Casa Bejuco · April</div>
+<div class="cv">0.0</div>
+<p>0.0% booked while the market sits at 17% of last year's finish.
+27 of 27 sellable nights still open.
+No booking has ever touched this period.</p></article>
+<article class="card far" data-key="casita|October" data-score="171.7" data-kind="far"><div class="ct">Casita Bejuco · October</div>
+<div class="cv">172</div>
+<p>Filling faster than the market — 100% booked against 58% saturation
+across 31 nights. Worth checking you are not leaving rate on the table.</p></article></div>
+<p id="allsnoozed" hidden>Everything flagged is snoozed right now. Nothing is asking for a decision.</p>
+<div id="snoozebar" hidden><span class="sncount"></span><button type="button" class="sntoggle"></button></div></section>
+<section><h2>Casa Bejuco · 3BR<span class="cs">ABB Comp: 3BR Houses Similar or slightly less nice than Casa Bejuco created 20260815 · 21 listings</span></h2>
+<div class="scroll"><table><thead><tr>
+<th scope="col" class="bh" tabindex="0" data-tip="Samara season. Non-overlapping, so no night is counted twice. The Easter bucket re-anchors each year to computed Easter Sunday, and March/April absorb the shift.">Bucket</th>
+<th scope="col" class="oth" tabindex="0" data-tip="Occupancy ÷ market saturation × 100. At 100 you are filling exactly in step with the market. Shaded red below 100 and deepest at 0, clear at 100, green up to 150. Past 150 it turns blue — not ‘better than green’ but a different story: so far ahead of the market that the likely cause is rate left on the table. Hidden when the market is under 5% (window not open) or fewer than 7 nights are sellable; buckets under 14 nights are capped at green because a single booking swings them.">On&nbsp;track</th>
+<th scope="col" tabindex="0" data-tip="Days since the most recent booking touching this bucket. Full Casa bookings count for both units. Shaded red because a long gap is a warning sign, not neutral context.">DSLB</th><th scope="col" tabindex="0" data-tip="Days since you last changed a pricing setting that actually reaches this bucket. Base, min and max move every date; a custom seasonal profile only moves the dates it covers, so this is scoped per bucket. Amber means the change is younger than the 21-day settle window — leave it alone, it has not had time to show up in bookings. — means nothing has ever been changed for these dates.">DSLA</th><th scope="col" tabindex="0" data-tip="Nights still sellable. Shaded red because a high number here is unsold inventory.">Avl</th><th scope="col" tabindex="0" data-tip="Market occupancy divided by what the compset actually finished at last year. How far the market has travelled toward its finish, not how full it is. Shaded green through white to red: green means the market has barely started booking and you still have runway; red means it is nearly done and this period needs checking now.">Sat%</th><th scope="col" tabindex="0" data-tip="Saturation points added in the last 7 days, from PriceLabs' own 7-day pickup divided by last year's occupancy. Blue shading is keyed to the busiest bucket in this column, so the darkest cells are where travellers are booking right now.">ΔWk</th><th scope="col" tabindex="0" data-tip="Saturation points added since the snapshot about 30 days back. Same blue scale as the weekly column, keyed to its own maximum. Blank until the archive is deep enough.">ΔMo</th><th scope="col" tabindex="0" data-tip="Saturation points the market has added since your last booking touching this bucket — read it beside DSLB. A big number means the market kept booking while you sat still: you are being passed over, and rate is the first thing to look at. A long DSLB with a small number here means the market stalled too — a different problem, and not a pricing signal. Red is keyed to the largest value in this column, so white is no movement and the darkest cell is the most passed-over bucket. Blank when the snapshot archive does not reach back to that booking.">ΔLB</th><th scope="col" tabindex="0" data-tip="Nights in this bucket.">Days</th><th scope="col" tabindex="0" data-tip="Nights booked — includes Full Casa bookings (which sell both units) and blocks you have annotated as real bookings.">Bkd</th><th scope="col" tabindex="0" data-tip="Nights you blocked for personal use — family, friends, maintenance. Excluded from the occupancy denominator.">Blk</th><th scope="col" tabindex="0" data-tip="Nights the Airbnb calendar is not open yet. Excluded from occupancy entirely — neither booked nor available.">Cls</th><th scope="col" tabindex="0" data-tip="Booked divided by (Booked + Available). Owner blocks and closed calendar are left out of the denominator. Shaded blue purely as a level indicator — high occupancy is not automatically good, it depends whether you are pacing with the market or filled early and cheap.">Occ%</th><th scope="col" tabindex="0" data-tip="Your compset's occupancy on the books right now for these dates.">Mkt%</th><th scope="col" tabindex="0" data-tip="What your compset actually finished at for these dates last year. The saturation denominator.">LY%</th></tr></thead>
+<tbody><tr class="behind">
+<th scope="row">September<span class="dates">09-01 – 09-30</span></th>
+<td class="otc"><span class="pill behind" style="--t:38.7%;--ramp:var(--ramp-warn)">12</span></td>
+<td class="ramp" style="--t:6.6%;--ramp:var(--ramp-warn)">18</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:35.5%;--ramp:var(--ramp-warn)">25</td><td class="ramp" style="--t:34.9%;--ramp:var(--ramp-warn)">90</td><td class="ramp" style="--t:33.4%;--ramp:var(--ramp-blue)">26</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:42.6%;--ramp:var(--ramp-cool)">30</td><td class="ramp" style="--t:4.3%;--ramp:var(--ramp-cool)">3</td><td class="ramp" style="--t:2.8%;--ramp:var(--ramp-cool)">2</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:4.7%;--ramp:var(--ramp-blue)">11</td><td class="ramp" style="--t:8.9%;--ramp:var(--ramp-cool)">20</td><td class="ramp" style="--t:10.0%;--ramp:var(--ramp-cool)">23</td></tr>
+<tr class="behind">
+<th scope="row">October<span class="dates">10-01 – 10-31</span></th>
+<td class="otc"><span class="pill behind" style="--t:10.1%;--ramp:var(--ramp-warn)">77</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:4.3%;--ramp:var(--ramp-warn)">3</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-warn)">117</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-blue)">34</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-cool)">28</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-blue)">90</td><td class="ramp" style="--t:6.8%;--ramp:var(--ramp-cool)">15</td><td class="ramp" style="--t:5.8%;--ramp:var(--ramp-cool)">13<i class="mk" title="thin base — last year under 15%">*</i></td></tr>
+<tr class="behind">
+<th scope="row">November<span class="dates">11-01 – 11-19</span></th>
+<td class="otc"><span class="pill behind" style="--t:25.5%;--ramp:var(--ramp-warn)">42</span></td>
+<td class="ramp" style="--t:14.7%;--ramp:var(--ramp-warn)">40</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:19.9%;--ramp:var(--ramp-warn)">14</td><td class="ramp" style="--t:10.5%;--ramp:var(--ramp-warn)">62</td><td class="ramp" style="--t:19.7%;--ramp:var(--ramp-blue)">15</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:27.0%;--ramp:var(--ramp-cool)">19</td><td class="ramp" style="--t:7.1%;--ramp:var(--ramp-cool)">5</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:11.6%;--ramp:var(--ramp-blue)">26</td><td class="ramp" style="--t:16.4%;--ramp:var(--ramp-cool)">37</td><td class="ramp" style="--t:26.4%;--ramp:var(--ramp-cool)">60</td></tr>
+<tr class="ahead">
+<th scope="row">Thanksgiving<span class="dates">11-20 – 11-29</span></th>
+<td class="otc"><span class="pill ahead" style="--t:30.8%;--ramp:var(--ramp-good)">135</span></td>
+<td class="ramp" style="--t:6.6%;--ramp:var(--ramp-warn)">18</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:2.8%;--ramp:var(--ramp-warn)">2</td><td class="ramp" style="--t:8.3%;--ramp:var(--ramp-warn)">59</td><td class="ramp" style="--t:6.2%;--ramp:var(--ramp-blue)">4.8</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:14.2%;--ramp:var(--ramp-cool)">10</td><td class="ramp" style="--t:11.4%;--ramp:var(--ramp-cool)">8</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:35.2%;--ramp:var(--ramp-blue)">80</td><td class="ramp" style="--t:21.3%;--ramp:var(--ramp-cool)">48</td><td class="ramp" style="--t:35.8%;--ramp:var(--ramp-cool)">81</td></tr>
+<tr class="behind">
+<th scope="row">Early December<span class="dates">11-30 – 12-18</span></th>
+<td class="otc"><span class="pill behind" style="--t:27.7%;--ramp:var(--ramp-warn)">37</span></td>
+<td class="ramp" style="--t:8.1%;--ramp:var(--ramp-warn)">22</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:19.9%;--ramp:var(--ramp-warn)">14</td><td class="ramp" style="--t:17.8%;--ramp:var(--ramp-warn)">70</td><td class="ramp" style="--t:5.9%;--ramp:var(--ramp-blue)">4.5</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:27.0%;--ramp:var(--ramp-cool)">19</td><td class="ramp" style="--t:7.1%;--ramp:var(--ramp-cool)">5</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:11.6%;--ramp:var(--ramp-blue)">26</td><td class="ramp" style="--t:20.6%;--ramp:var(--ramp-cool)">47</td><td class="ramp" style="--t:29.3%;--ramp:var(--ramp-cool)">67</td></tr>
+<tr class="behind">
+<th scope="row">Christmas<span class="dates">12-19 – 01-02</span></th>
+<td class="otc"><span class="pill behind" style="--t:7.5%;--ramp:var(--ramp-warn)">83</span></td>
+<td class="ramp" style="--t:6.6%;--ramp:var(--ramp-warn)">18</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:7.1%;--ramp:var(--ramp-warn)">5</td><td class="ramp" style="--t:27.0%;--ramp:var(--ramp-warn)">81</td><td class="ramp" style="--t:6.5%;--ramp:var(--ramp-blue)">5.0</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:21.3%;--ramp:var(--ramp-cool)">15</td><td class="ramp" style="--t:14.2%;--ramp:var(--ramp-cool)">10</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:29.3%;--ramp:var(--ramp-blue)">67</td><td class="ramp" style="--t:31.4%;--ramp:var(--ramp-cool)">71</td><td class="ramp" style="--t:39.0%;--ramp:var(--ramp-cool)">89</td></tr>
+<tr class="behind">
+<th scope="row">January<span class="dates">01-03 – 01-31</span></th>
+<td class="otc"><span class="pill behind" style="--t:27.3%;--ramp:var(--ramp-warn)">38</span></td>
+<td class="ramp" style="--t:3.7%;--ramp:var(--ramp-warn)">10</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:29.8%;--ramp:var(--ramp-warn)">21</td><td class="ramp" style="--t:19.1%;--ramp:var(--ramp-warn)">72</td><td class="ramp" style="--t:8.5%;--ramp:var(--ramp-blue)">6.5</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-warn)">8.5</td><td class="ramp" style="--t:41.2%;--ramp:var(--ramp-cool)">29</td><td class="ramp" style="--t:11.4%;--ramp:var(--ramp-cool)">8</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:12.1%;--ramp:var(--ramp-blue)">28</td><td class="ramp" style="--t:26.2%;--ramp:var(--ramp-cool)">60</td><td class="ramp" style="--t:36.6%;--ramp:var(--ramp-cool)">83</td></tr>
+<tr class="behind">
+<th scope="row">February<span class="dates">02-01 – 02-28</span></th>
+<td class="otc"><span class="pill behind" style="--t:44.0%;--ramp:var(--ramp-warn)">0.0</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-warn)">28</td><td class="ramp" style="--t:6.9%;--ramp:var(--ramp-warn)">58</td><td class="ramp" style="--t:9.5%;--ramp:var(--ramp-blue)">7.3</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-cool)">28</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:22.9%;--ramp:var(--ramp-cool)">52</td><td class="ramp" style="--t:39.6%;--ramp:var(--ramp-cool)">90</td></tr>
+<tr class="behind">
+<th scope="row">March<span class="dates">03-01 – 03-18</span></th>
+<td class="otc"><span class="pill behind" style="--t:44.0%;--ramp:var(--ramp-warn)">0.0</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:25.5%;--ramp:var(--ramp-warn)">18</td><td class="ramp" style="--t:3.5%;--ramp:var(--ramp-good)">46</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:25.5%;--ramp:var(--ramp-cool)">18</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:16.4%;--ramp:var(--ramp-cool)">37</td><td class="ramp" style="--t:35.6%;--ramp:var(--ramp-cool)">81</td></tr>
+<tr class="behind">
+<th scope="row">Easter<span class="dates">03-19 – 04-03</span></th>
+<td class="otc"><span class="pill behind" style="--t:44.0%;--ramp:var(--ramp-warn)">0.0</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:22.7%;--ramp:var(--ramp-warn)">16</td><td class="ramp" style="--t:18.9%;--ramp:var(--ramp-good)">29</td><td class="ramp" style="--t:3.6%;--ramp:var(--ramp-blue)">2.8</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:22.7%;--ramp:var(--ramp-cool)">16</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:11.1%;--ramp:var(--ramp-cool)">25</td><td class="ramp" style="--t:38.7%;--ramp:var(--ramp-cool)">88</td></tr>
+<tr class="behind">
+<th scope="row">April<span class="dates">04-04 – 04-30</span></th>
+<td class="otc"><span class="pill behind" style="--t:44.0%;--ramp:var(--ramp-warn)">0.0</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:38.3%;--ramp:var(--ramp-warn)">27</td><td class="ramp" style="--t:29.1%;--ramp:var(--ramp-good)">17</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:38.3%;--ramp:var(--ramp-cool)">27</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:5.5%;--ramp:var(--ramp-cool)">13</td><td class="ramp" style="--t:32.6%;--ramp:var(--ramp-cool)">74</td></tr>
+<tr class="behind">
+<th scope="row">May<span class="dates">05-01 – 05-31</span></th>
+<td class="otc"><span class="pill behind" style="--t:44.0%;--ramp:var(--ramp-warn)">0.0</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-warn)">28</td><td class="ramp" style="--t:32.5%;--ramp:var(--ramp-good)">13</td><td class="ramp" style="--t:5.2%;--ramp:var(--ramp-blue)">4.0</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:4.3%;--ramp:var(--ramp-cool)">3</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:3.6%;--ramp:var(--ramp-cool)">8.1</td><td class="ramp" style="--t:27.4%;--ramp:var(--ramp-cool)">62</td></tr>
+<tr class="na">
+<th scope="row">June<span class="dates">06-01 – 06-30</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:40.3%;--ramp:var(--ramp-good)">4.2</td><td class="ramp" style="--t:0.9%;--ramp:var(--ramp-blue)">0.7</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:42.6%;--ramp:var(--ramp-cool)">30</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:42.6%;--ramp:var(--ramp-cool)">30</td><td class="ramp">—</td><td class="ramp" style="--t:1.2%;--ramp:var(--ramp-cool)">2.7</td><td class="ramp" style="--t:28.3%;--ramp:var(--ramp-cool)">64</td></tr>
+<tr class="na">
+<th scope="row">July<span class="dates">07-01 – 07-31</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:43.5%;--ramp:var(--ramp-good)">0.5</td><td class="ramp" style="--t:0.7%;--ramp:var(--ramp-blue)">0.5</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp">—</td><td class="ramp" style="--t:0.2%;--ramp:var(--ramp-cool)">0.4</td><td class="ramp" style="--t:34.2%;--ramp:var(--ramp-cool)">78</td></tr>
+<tr class="na">
+<th scope="row">August<span class="dates">08-01 – 08-31</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:42.9%;--ramp:var(--ramp-good)">1.2</td><td class="ramp" style="--t:1.6%;--ramp:var(--ramp-blue)">1.2</td><td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp">—</td><td class="ramp" style="--t:0.3%;--ramp:var(--ramp-cool)">0.6</td><td class="ramp" style="--t:22.2%;--ramp:var(--ramp-cool)">50</td></tr></tbody></table></div></section>
+<section><h2>Casita Bejuco · 2BR<span class="cs">ABB: 2 Bedrooms · 296 listings</span></h2>
+<div class="scroll"><table><thead><tr>
+<th scope="col" class="bh" tabindex="0" data-tip="Samara season. Non-overlapping, so no night is counted twice. The Easter bucket re-anchors each year to computed Easter Sunday, and March/April absorb the shift.">Bucket</th>
+<th scope="col" class="oth" tabindex="0" data-tip="Occupancy ÷ market saturation × 100. At 100 you are filling exactly in step with the market. Shaded red below 100 and deepest at 0, clear at 100, green up to 150. Past 150 it turns blue — not ‘better than green’ but a different story: so far ahead of the market that the likely cause is rate left on the table. Hidden when the market is under 5% (window not open) or fewer than 7 nights are sellable; buckets under 14 nights are capped at green because a single booking swings them.">On&nbsp;track</th>
+<th scope="col" tabindex="0" data-tip="Days since the most recent booking touching this bucket. Full Casa bookings count for both units. Shaded red because a long gap is a warning sign, not neutral context.">DSLB</th><th scope="col" tabindex="0" data-tip="Days since you last changed a pricing setting that actually reaches this bucket. Base, min and max move every date; a custom seasonal profile only moves the dates it covers, so this is scoped per bucket. Amber means the change is younger than the 21-day settle window — leave it alone, it has not had time to show up in bookings. — means nothing has ever been changed for these dates.">DSLA</th><th scope="col" tabindex="0" data-tip="Nights still sellable. Shaded red because a high number here is unsold inventory.">Avl</th><th scope="col" tabindex="0" data-tip="Market occupancy divided by what the compset actually finished at last year. How far the market has travelled toward its finish, not how full it is. Shaded green through white to red: green means the market has barely started booking and you still have runway; red means it is nearly done and this period needs checking now.">Sat%</th><th scope="col" tabindex="0" data-tip="Saturation points added in the last 7 days, from PriceLabs' own 7-day pickup divided by last year's occupancy. Blue shading is keyed to the busiest bucket in this column, so the darkest cells are where travellers are booking right now.">ΔWk</th><th scope="col" tabindex="0" data-tip="Saturation points added since the snapshot about 30 days back. Same blue scale as the weekly column, keyed to its own maximum. Blank until the archive is deep enough.">ΔMo</th><th scope="col" tabindex="0" data-tip="Saturation points the market has added since your last booking touching this bucket — read it beside DSLB. A big number means the market kept booking while you sat still: you are being passed over, and rate is the first thing to look at. A long DSLB with a small number here means the market stalled too — a different problem, and not a pricing signal. Red is keyed to the largest value in this column, so white is no movement and the darkest cell is the most passed-over bucket. Blank when the snapshot archive does not reach back to that booking.">ΔLB</th><th scope="col" tabindex="0" data-tip="Nights in this bucket.">Days</th><th scope="col" tabindex="0" data-tip="Nights booked — includes Full Casa bookings (which sell both units) and blocks you have annotated as real bookings.">Bkd</th><th scope="col" tabindex="0" data-tip="Nights you blocked for personal use — family, friends, maintenance. Excluded from the occupancy denominator.">Blk</th><th scope="col" tabindex="0" data-tip="Nights the Airbnb calendar is not open yet. Excluded from occupancy entirely — neither booked nor available.">Cls</th><th scope="col" tabindex="0" data-tip="Booked divided by (Booked + Available). Owner blocks and closed calendar are left out of the denominator. Shaded blue purely as a level indicator — high occupancy is not automatically good, it depends whether you are pacing with the market or filled early and cheap.">Occ%</th><th scope="col" tabindex="0" data-tip="Your compset's occupancy on the books right now for these dates.">Mkt%</th><th scope="col" tabindex="0" data-tip="What your compset actually finished at for these dates last year. The saturation denominator.">LY%</th></tr></thead>
+<tbody><tr class="behind">
+<th scope="row">September<span class="dates">09-01 – 09-30</span></th>
+<td class="otc"><span class="pill behind" style="--t:0.0%;--ramp:var(--ramp-warn)">100</span></td>
+<td class="ramp" style="--t:8.1%;--ramp:var(--ramp-warn)">22</td><td class="ramp">—</td><td class="ramp" style="--t:9.9%;--ramp:var(--ramp-warn)">7</td><td class="ramp" style="--t:23.6%;--ramp:var(--ramp-warn)">77</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-blue)">15</td><td class="ramp" style="--t:33.8%;--ramp:var(--ramp-blue)">6.5</td><td class="ramp">—</td><td class="ramp" style="--t:42.6%;--ramp:var(--ramp-cool)">30</td><td class="ramp" style="--t:32.6%;--ramp:var(--ramp-cool)">23</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:33.7%;--ramp:var(--ramp-blue)">77</td><td class="ramp" style="--t:5.9%;--ramp:var(--ramp-cool)">14</td><td class="ramp" style="--t:7.7%;--ramp:var(--ramp-cool)">18</td></tr>
+<tr class="far">
+<th scope="row">October<span class="dates">10-01 – 10-31</span></th>
+<td class="otc"><span class="pill far" style="--t:44.0%;--ramp:var(--ramp-blue)">172</span></td>
+<td class="ramp" style="--t:42.2%;--ramp:var(--ramp-warn)">115</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:7.3%;--ramp:var(--ramp-warn)">58</td><td class="ramp" style="--t:25.8%;--ramp:var(--ramp-blue)">8.6</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-blue)">8.4</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-blue)">100</td><td class="ramp" style="--t:4.9%;--ramp:var(--ramp-cool)">11</td><td class="ramp" style="--t:8.5%;--ramp:var(--ramp-cool)">19</td></tr>
+<tr class="ahead">
+<th scope="row">November<span class="dates">11-01 – 11-19</span></th>
+<td class="otc"><span class="pill ahead" style="--t:14.1%;--ramp:var(--ramp-good)">116</span></td>
+<td class="ramp" style="--t:1.5%;--ramp:var(--ramp-warn)">4</td><td class="ramp" style="--t:37.7%;--ramp:var(--ramp-settle)">3</td><td class="ramp" style="--t:11.4%;--ramp:var(--ramp-warn)">8</td><td class="ramp" style="--t:0.1%;--ramp:var(--ramp-good)">50</td><td class="ramp" style="--t:12.9%;--ramp:var(--ramp-blue)">4.3</td><td class="ramp" style="--t:22.3%;--ramp:var(--ramp-blue)">4.3</td><td class="ramp" style="--t:6.0%;--ramp:var(--ramp-warn)">0.7</td><td class="ramp" style="--t:27.0%;--ramp:var(--ramp-cool)">19</td><td class="ramp" style="--t:15.6%;--ramp:var(--ramp-cool)">11</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:25.5%;--ramp:var(--ramp-blue)">58</td><td class="ramp" style="--t:9.2%;--ramp:var(--ramp-cool)">21</td><td class="ramp" style="--t:18.4%;--ramp:var(--ramp-cool)">42</td></tr>
+<tr class="far">
+<th scope="row">Thanksgiving<span class="dates">11-20 – 11-29</span></th>
+<td class="otc"><span class="pill far" style="--t:44.0%;--ramp:var(--ramp-blue)">170</span></td>
+<td class="ramp" style="--t:6.6%;--ramp:var(--ramp-warn)">18</td><td class="ramp">—</td><td class="ramp" style="--t:2.8%;--ramp:var(--ramp-warn)">2</td><td class="ramp" style="--t:2.6%;--ramp:var(--ramp-good)">47</td><td class="ramp" style="--t:13.4%;--ramp:var(--ramp-blue)">4.5</td><td class="ramp" style="--t:23.8%;--ramp:var(--ramp-blue)">4.6</td><td class="ramp">—</td><td class="ramp" style="--t:14.2%;--ramp:var(--ramp-cool)">10</td><td class="ramp" style="--t:11.4%;--ramp:var(--ramp-cool)">8</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:35.2%;--ramp:var(--ramp-blue)">80</td><td class="ramp" style="--t:11.3%;--ramp:var(--ramp-cool)">26</td><td class="ramp" style="--t:24.0%;--ramp:var(--ramp-cool)">55</td></tr>
+<tr class="behind">
+<th scope="row">Early December<span class="dates">11-30 – 12-18</span></th>
+<td class="otc"><span class="pill behind" style="--t:22.9%;--ramp:var(--ramp-warn)">48</span></td>
+<td class="ramp" style="--t:8.1%;--ramp:var(--ramp-warn)">22</td><td class="ramp">—</td><td class="ramp" style="--t:19.9%;--ramp:var(--ramp-warn)">14</td><td class="ramp" style="--t:3.9%;--ramp:var(--ramp-warn)">54</td><td class="ramp" style="--t:10.5%;--ramp:var(--ramp-blue)">3.5</td><td class="ramp" style="--t:30.3%;--ramp:var(--ramp-blue)">5.8</td><td class="ramp">—</td><td class="ramp" style="--t:27.0%;--ramp:var(--ramp-cool)">19</td><td class="ramp" style="--t:7.1%;--ramp:var(--ramp-cool)">5</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:11.6%;--ramp:var(--ramp-blue)">26</td><td class="ramp" style="--t:12.1%;--ramp:var(--ramp-cool)">28</td><td class="ramp" style="--t:22.3%;--ramp:var(--ramp-cool)">51</td></tr>
+<tr class="ahead">
+<th scope="row">Christmas<span class="dates">12-19 – 01-02</span></th>
+<td class="otc"><span class="pill ahead" style="--t:3.5%;--ramp:var(--ramp-good)">104</span></td>
+<td class="ramp" style="--t:25.3%;--ramp:var(--ramp-warn)">69</td><td class="ramp">—</td><td class="ramp" style="--t:5.7%;--ramp:var(--ramp-warn)">4</td><td class="ramp" style="--t:17.9%;--ramp:var(--ramp-warn)">70</td><td class="ramp" style="--t:11.9%;--ramp:var(--ramp-blue)">3.9</td><td class="ramp" style="--t:43.0%;--ramp:var(--ramp-blue)">8.2</td><td class="ramp">—</td><td class="ramp" style="--t:21.3%;--ramp:var(--ramp-cool)">15</td><td class="ramp" style="--t:15.6%;--ramp:var(--ramp-cool)">11</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:32.3%;--ramp:var(--ramp-blue)">73</td><td class="ramp" style="--t:24.5%;--ramp:var(--ramp-cool)">56</td><td class="ramp" style="--t:34.9%;--ramp:var(--ramp-cool)">79</td></tr>
+<tr class="ahead">
+<th scope="row">January<span class="dates">01-03 – 01-31</span></th>
+<td class="otc"><span class="pill ahead" style="--t:36.1%;--ramp:var(--ramp-good)">141</span></td>
+<td class="ramp" style="--t:6.2%;--ramp:var(--ramp-warn)">17</td><td class="ramp">—</td><td class="ramp" style="--t:7.1%;--ramp:var(--ramp-warn)">5</td><td class="ramp" style="--t:7.8%;--ramp:var(--ramp-warn)">59</td><td class="ramp" style="--t:5.4%;--ramp:var(--ramp-blue)">1.8</td><td class="ramp" style="--t:20.7%;--ramp:var(--ramp-blue)">4.0</td><td class="ramp">—</td><td class="ramp" style="--t:41.2%;--ramp:var(--ramp-cool)">29</td><td class="ramp" style="--t:34.1%;--ramp:var(--ramp-cool)">24</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:36.4%;--ramp:var(--ramp-blue)">83</td><td class="ramp" style="--t:21.2%;--ramp:var(--ramp-cool)">48</td><td class="ramp" style="--t:36.0%;--ramp:var(--ramp-cool)">82</td></tr>
+<tr class="behind">
+<th scope="row">February<span class="dates">02-01 – 02-28</span></th>
+<td class="otc"><span class="pill behind" style="--t:26.0%;--ramp:var(--ramp-warn)">41</span></td>
+<td class="ramp" style="--t:3.3%;--ramp:var(--ramp-warn)">9</td><td class="ramp">—</td><td class="ramp" style="--t:32.6%;--ramp:var(--ramp-warn)">23</td><td class="ramp" style="--t:5.6%;--ramp:var(--ramp-good)">44</td><td class="ramp" style="--t:1.3%;--ramp:var(--ramp-blue)">0.4</td><td class="ramp" style="--t:2.3%;--ramp:var(--ramp-blue)">-0.4</td><td class="ramp">-1.1</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-cool)">28</td><td class="ramp" style="--t:7.1%;--ramp:var(--ramp-cool)">5</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:7.9%;--ramp:var(--ramp-blue)">18</td><td class="ramp" style="--t:16.5%;--ramp:var(--ramp-cool)">37</td><td class="ramp" style="--t:37.8%;--ramp:var(--ramp-cool)">86</td></tr>
+<tr class="ahead">
+<th scope="row">March<span class="dates">03-01 – 03-18</span></th>
+<td class="otc"><span class="pill ahead" style="--t:0.9%;--ramp:var(--ramp-good)">101</span></td>
+<td class="ramp" style="--t:4.8%;--ramp:var(--ramp-warn)">13</td><td class="ramp">—</td><td class="ramp" style="--t:15.6%;--ramp:var(--ramp-warn)">11</td><td class="ramp" style="--t:10.0%;--ramp:var(--ramp-good)">39</td><td class="ramp" style="--t:5.1%;--ramp:var(--ramp-blue)">1.7</td><td class="ramp" style="--t:2.4%;--ramp:var(--ramp-blue)">-0.5</td><td class="ramp">—</td><td class="ramp" style="--t:25.5%;--ramp:var(--ramp-cool)">18</td><td class="ramp" style="--t:9.9%;--ramp:var(--ramp-cool)">7</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:17.1%;--ramp:var(--ramp-blue)">39</td><td class="ramp" style="--t:12.7%;--ramp:var(--ramp-cool)">29</td><td class="ramp" style="--t:32.8%;--ramp:var(--ramp-cool)">75</td></tr>
+<tr class="behind">
+<th scope="row">Easter<span class="dates">03-19 – 04-03</span></th>
+<td class="otc"><span class="pill behind" style="--t:44.0%;--ramp:var(--ramp-warn)">0.0</span></td>
+<td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:22.7%;--ramp:var(--ramp-warn)">16</td><td class="ramp" style="--t:29.8%;--ramp:var(--ramp-good)">16</td><td class="ramp" style="--t:1.1%;--ramp:var(--ramp-blue)">0.4</td><td class="ramp" style="--t:2.9%;--ramp:var(--ramp-blue)">0.6</td><td class="ramp">—</td><td class="ramp" style="--t:22.7%;--ramp:var(--ramp-cool)">16</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:5.4%;--ramp:var(--ramp-cool)">12</td><td class="ramp" style="--t:33.3%;--ramp:var(--ramp-cool)">76</td></tr>
+<tr class="na">
+<th scope="row">April<span class="dates">04-04 – 04-30</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:38.3%;--ramp:var(--ramp-warn)">27</td><td class="ramp" style="--t:35.6%;--ramp:var(--ramp-good)">9.5</td><td class="ramp" style="--t:1.0%;--ramp:var(--ramp-blue)">0.3</td><td class="ramp" style="--t:7.8%;--ramp:var(--ramp-blue)">1.5</td><td class="ramp">—</td><td class="ramp" style="--t:38.3%;--ramp:var(--ramp-cool)">27</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:2.1%;--ramp:var(--ramp-cool)">4.8</td><td class="ramp" style="--t:22.3%;--ramp:var(--ramp-cool)">51</td></tr>
+<tr class="na">
+<th scope="row">May<span class="dates">05-01 – 05-31</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:39.7%;--ramp:var(--ramp-warn)">28</td><td class="ramp" style="--t:38.2%;--ramp:var(--ramp-good)">6.6</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:5.8%;--ramp:var(--ramp-blue)">1.1</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:4.3%;--ramp:var(--ramp-cool)">3</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:0.7%;--ramp:var(--ramp-cool)">1.7</td><td class="ramp" style="--t:11.2%;--ramp:var(--ramp-cool)">25</td></tr>
+<tr class="na">
+<th scope="row">June<span class="dates">06-01 – 06-30</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:40.9%;--ramp:var(--ramp-good)">3.6</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:4.0%;--ramp:var(--ramp-blue)">0.8</td><td class="ramp">—</td><td class="ramp" style="--t:42.6%;--ramp:var(--ramp-cool)">30</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:42.6%;--ramp:var(--ramp-cool)">30</td><td class="ramp">—</td><td class="ramp" style="--t:0.5%;--ramp:var(--ramp-cool)">1.2</td><td class="ramp" style="--t:14.2%;--ramp:var(--ramp-cool)">32</td></tr>
+<tr class="na">
+<th scope="row">July<span class="dates">07-01 – 07-31</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:42.4%;--ramp:var(--ramp-good)">1.8</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:1.2%;--ramp:var(--ramp-blue)">0.2</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp">—</td><td class="ramp" style="--t:0.4%;--ramp:var(--ramp-cool)">0.9</td><td class="ramp" style="--t:22.0%;--ramp:var(--ramp-cool)">50</td></tr>
+<tr class="na">
+<th scope="row">August<span class="dates">08-01 – 08-31</span></th>
+<td class="otc"><span class="pill na">—</span></td>
+<td class="ramp">—</td><td class="ramp">—</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-warn)">0</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-good)">0.0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-blue)">0.0</td><td class="ramp">—</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">·</td><td class="ramp" style="--t:44.0%;--ramp:var(--ramp-cool)">31</td><td class="ramp">—</td><td class="ramp" style="--t:0.0%;--ramp:var(--ramp-cool)">0.0</td><td class="ramp" style="--t:15.7%;--ramp:var(--ramp-cool)">36</td></tr></tbody></table></div></section>
+<p class="hint">Shading tracks magnitude within each column — teal for context, red where a high
+number is bad (unsold nights, staleness), blue for neutral level (occupancy, and market pickup keyed to its own maximum), and amber on DSLA where a change is still settling. Saturation runs green through white to red: green means runway left, red means the market is nearly finished booking that period. The blue columns are keyed to their own maximum, so the darkest cells are the periods travellers are booking right now. On-track runs red at 0 through clear at 100 to green at 150, with a flat blue beyond it.</p>
+<section><h3>Settings &amp; change record</h3><div class="setgrid"><article class="setcard"><h4>Casa Bejuco</h4><div class="setrow"><span>base price</span><span>$250 <span class="rec">PL says $247</span></span></div><div class="setrow"><span>min price</span><span>$180</span></div><div class="setrow"><span>max price</span><span>not set</span></div><div class="setrow"><span>last minute</span><span class="custom">aggressive</span></div><div class="setrow"><span>customizations source</span><span class="custom">get_customizations</span></div><div class="profs"><div class="proflabel">seasonal profiles (7) &middot; web UI only</div><div class="prof"><span>05-01..05-31</span><span>no overrides</span></div><div class="prof"><span>06-01..06-30</span><span>no overrides</span></div><div class="prof"><span>07-01..07-31</span><span>no overrides</span></div><div class="prof"><span>08-01..08-31</span><span>no overrides</span></div><div class="prof"><span>09-01..09-25</span><span>base $200, min $130, max $140</span></div><div class="prof"><span>10-01..10-31</span><span>no overrides</span></div><div class="prof"><span>11-07..11-15</span><span>base $250, min $180</span></div></div><div class="since settling">Last changed 3 days ago — still settling, leave it alone</div></article><article class="setcard"><h4>Casita Bejuco</h4><div class="setrow"><span>base price</span><span>$130 <span class="rec">PL says $134</span></span></div><div class="setrow"><span>min price</span><span>$80</span></div><div class="setrow"><span>max price</span><span>not set</span></div><div class="setrow"><span>dow</span><span class="custom">Fri +5%, Sat +5%</span></div><div class="setrow"><span>last minute</span><span class="custom">aggressive</span></div><div class="setrow"><span>customizations source</span><span class="custom">get_customizations</span></div><div class="profs"><div class="proflabel">seasonal profiles (22) &middot; web UI only</div><div class="prof"><span>01-01..01-16</span><span>min $205</span></div><div class="prof"><span>01-17..02-06</span><span>min $215</span></div><div class="prof"><span>02-07..03-08</span><span>min $195</span></div><div class="prof"><span>03-09..04-02</span><span>min $180</span></div><div class="prof"><span>04-03..04-04</span><span>min $200</span></div><div class="prof"><span>04-05..05-02</span><span>min $150</span></div><div class="prof"><span>05-03..05-10</span><span>min $125</span></div><div class="prof"><span>05-11..05-27</span><span>min $135</span></div><div class="prof"><span>05-28..06-03</span><span>min $110</span></div><div class="prof"><span>06-04..06-26</span><span>min $120</span></div><div class="prof"><span>06-27..07-03</span><span>min $130</span></div><div class="prof"><span>07-04..07-10</span><span>min $170</span></div><div class="prof"><span>07-11..08-09</span><span>min $175</span></div><div class="prof"><span>08-10..08-16</span><span>min $180</span></div><div class="prof"><span>08-17..08-31</span><span>min $105</span></div><div class="prof"><span>09-01..09-14</span><span>min $105</span></div><div class="prof"><span>09-15..09-30</span><span>min $110</span></div><div class="prof"><span>10-01..10-29</span><span>min $100</span></div><div class="prof"><span>10-30..11-12</span><span>min $115</span></div><div class="prof"><span>11-13..12-10</span><span>min $165</span></div><div class="prof"><span>12-11..12-18</span><span>min $180</span></div><div class="prof"><span>12-19..12-31</span><span>min $350</span></div></div><div class="since settling">Last changed 3 days ago — still settling, leave it alone</div></article></div><div class="logbox"><div class="entry"><div class="edate">2026-09-06<span class="eage">3d ago</span></div><div class="ewhat">Casita Bejuco seasonal_profiles <span class="emove">[{"base": null, "max": null, "min": 105, "range": "08-17..08-31"}, {"base": null, "max": null, "min": 105, "range": "09-01..09-14"}, {"base": null, "max": null, "min": 110, "range": "09-15..09-30"}, {"base": null, "max": null, "min": 100, "range": "10-01..10-29"}] &rarr; [{"base": null, "max": null, "min": 105, "range": "09-01..09-14"}, {"base": null, "max": null, "min": 110, "range": "09-15..09-30"}, {"base": null, "max": null, "min": 100, "range": "10-01..10-29"}, {"base": null, "max": null, "min": 115, "range": "10-30..11-12"}]</span><span class="enote">Detected by comparing against the 2026-08-30 snapshot. applies_to corrected 2026-09-07: the original entry also listed 08-17..08-31, which did not change — it merely scrolled out of the diagnose_no_bookings ~60-day reporting window. The only real edit is the new 10-30..11-12 min 115 profile. changed_profile_ranges() now applies that window test itself.</span></div><div><span class="badge settling">settling</span></div></div><div class="entry"><div class="edate">2026-09-06<span class="eage">3d ago</span></div><div class="ewhat">Casa Bejuco seasonal_profiles <span class="emove">[{"base": null, "max": null, "min": null, "range": "08-01..08-31"}, {"base": 200, "max": null, "min": 150, "range": "09-01..09-30"}, {"base": 200, "max": null, "min": 150, "range": "10-01..10-31"}] &rarr; [{"base": 200, "max": 140, "min": 130, "range": "09-01..09-25"}, {"base": null, "max": null, "min": null, "range": "10-01..10-31"}]</span><span class="enote">Detected by comparing against the 2026-08-30 snapshot. applies_to corrected 2026-09-07: the original entry also listed 08-01..08-31, which did not change — it scrolled out of the ~60-day reporting window. Real edits: the September profile narrowed to 09-01..09-25 and gained min 130 / max 140 (base above max is deliberate, see known_quirks), and the October profile's base/min were cleared.</span></div><div><span class="badge settling">settling</span></div></div><div class="entry"><div class="edate">2026-09-06<span class="eage">3d ago</span></div><div class="ewhat">Casa Bejuco max price <span class="emove">$1200 &rarr; not set</span><span class="enote">Detected by comparing against the 2026-08-30 snapshot. CONFIRMED 2026-09-07: Scott says he removed the Casa max deliberately, and get_listing_data returns max=null (base 250, min 180, recommended 271). This is a real change, not a read gap. Note it was never binding — max_price_hit_days was 0/61 — so it moves no price today, but it does remove the ceiling for Christmas and Easter.</span></div><div><span class="badge settling">settling</span></div></div><div class="entry"><div class="edate">2026-08-29<span class="eage">11d ago</span></div><div class="ewhat">Casa Bejuco base price <span class="emove">$270 &rarr; $250</span><span class="enote">Lowered after reviewing the dashboard — Casa pacing behind across January, February and Easter. PriceLabs still recommends 270. Settle window closes 2026-09-19; this is the lever that gates every Casa recommendation until then.</span></div><div><span class="badge settling">settling</span></div></div><div class="entry"><div class="edate">2026-08-28<span class="eage">12d ago</span></div><div class="ewhat">Casa Bejuco seasonal_profiles <span class="emove">Sep 1-30 and Oct 1-31: base $250, min $170 &rarr; Sep 1-30 and Oct 1-31: base $200, min $150</span><span class="enote">Lowered both shoulder-season profiles alongside the base rate. Web UI only — not writable via the API. Casa is now hitting its min price on 52 of the next 61 days, so the floor is setting the price most days rather than the algorithm.</span></div><div><span class="badge settling">settling</span></div></div></div><p class="hint" style="margin-top:11px">A price change takes weeks to reach bookings — the compset&rsquo;s median lead time is 57 days — so anything under 21 days old is marked still settling. Changing the same lever again before then means you never find out what the first change did.</p></section>
+<section class="notes"><h3>Reading this / data quality</h3><ul>
+<li><strong>October is a booking, not a closure.</strong> Those 28 Casa and 27 Casita nights were taken
+off-Airbnb and blocked to keep channels in sync, so they count as booked. The $10 Full Casa reservation
+across the same dates is the sync placeholder, not the revenue.</li>
+<li><strong>Short buckets never get flagged as over-pacing.</strong> Thanksgiving is 10 nights — one
+booking reads as 80% occupancy — so buckets under 14 nights show their score without the yellow flag.</li>
+<li><strong>The calendar is not open past 2027-05-29</strong> — a 103-night block. Those nights are excluded from occupancy rather than counted available, which is why the far buckets are blank.</li>
+<li><strong>ΔMo and ΔLB are blank where the archive cannot answer.</strong> They need archive depth and
+will fill in as daily snapshots accumulate. Blank beats invented.</li>
+<li>Compsets unchanged since the last snapshot, so the market series is continuous. Each listing's compset is named beside its table.</li>
+</ul></section>
+</div>
+<script>
+(function () {
+  var KEY = 'bejuco.snooze.v1', DAYS = 21, DRIFT = 15;
+  function read() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function write(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  function plus(n) { var d = new Date(); d.setDate(d.getDate() + n); return iso(d); }
+  function pretty(s) {
+    var p = s.split('-'), m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return m[parseInt(p[1], 10) - 1] + ' ' + parseInt(p[2], 10);
+  }
+
+  var today = iso(new Date());
+  var store = read();
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card[data-key]'));
+  var bar = document.getElementById('snoozebar');
+  var none = document.getElementById('allsnoozed');
+  var revealed = false;
+  if (!cards.length || !bar) { return; }
+
+  // A card returns early if its score moved DRIFT points the wrong way. For a far-ahead
+  // card "worse" is higher; for a behind-pace card it is lower.
+  function deteriorated(kind, now, then) {
+    if (now === null || then === null || isNaN(now) || isNaN(then)) { return false; }
+    return kind === 'far' ? (now > then + DRIFT) : (now < then - DRIFT);
+  }
+
+  function render() {
+    var snoozedCount = 0, visible = 0;
+    cards.forEach(function (c) {
+      var k = c.getAttribute('data-key'), s = store[k];
+      var raw = c.getAttribute('data-score');
+      var now = raw === '' ? null : parseFloat(raw);
+      var active = !!(s && today < s.until && !deteriorated(c.getAttribute('data-kind'), now, s.at));
+      if (s && !active) { delete store[k]; write(store); s = null; }
+      c.classList.toggle('snoozed', active);
+      c.hidden = active && !revealed;
+      var btn = c.querySelector('.snz');
+      btn.textContent = active ? 'undo' : 'x';
+      btn.setAttribute('aria-label', (active ? 'Un-snooze ' : 'Snooze ') + k.replace('|', ' '));
+      var until = c.querySelector('.snuntil');
+      if (until) { until.textContent = active ? 'Snoozed until ' + pretty(s.until) : ''; }
+      if (active) { snoozedCount++; }
+      if (!c.hidden) { visible++; }
+    });
+    bar.hidden = snoozedCount === 0;
+    if (!snoozedCount) { revealed = false; }
+    bar.querySelector('.sncount').textContent =
+      snoozedCount + ' snoozed' + (snoozedCount && !revealed ? ' and hidden' : '');
+    bar.querySelector('.sntoggle').textContent = revealed ? 'Hide them' : 'Show them';
+    if (none) { none.hidden = visible > 0; }
+  }
+
+  cards.forEach(function (c) {
+    var btn = document.createElement('button');
+    btn.className = 'snz';
+    btn.type = 'button';
+    btn.addEventListener('click', function () {
+      var k = c.getAttribute('data-key');
+      if (store[k]) { delete store[k]; }
+      else {
+        var raw = c.getAttribute('data-score');
+        store[k] = { until: plus(DAYS), at: raw === '' ? null : parseFloat(raw) };
+      }
+      write(store);
+      render();
+    });
+    c.appendChild(btn);
+    var u = document.createElement('div');
+    u.className = 'snuntil';
+    c.appendChild(u);
+  });
+
+  bar.querySelector('.sntoggle').addEventListener('click', function () {
+    revealed = !revealed;
+    render();
+  });
+  render();
+})();
+</script>

@@ -1,0 +1,63 @@
+{
+  "settle_days": 21,
+  "changes": [
+    {
+      "date": "2026-09-06",
+      "listing": "casita",
+      "field": "seasonal_profiles",
+      "from": "[{\"base\": null, \"max\": null, \"min\": 105, \"range\": \"08-17..08-31\"}, {\"base\": null, \"max\": null, \"min\": 105, \"range\": \"09-01..09-14\"}, {\"base\": null, \"max\": null, \"min\": 110, \"range\": \"09-15..09-30\"}, {\"base\": null, \"max\": null, \"min\": 100, \"range\": \"10-01..10-29\"}]",
+      "to": "[{\"base\": null, \"max\": null, \"min\": 105, \"range\": \"09-01..09-14\"}, {\"base\": null, \"max\": null, \"min\": 110, \"range\": \"09-15..09-30\"}, {\"base\": null, \"max\": null, \"min\": 100, \"range\": \"10-01..10-29\"}, {\"base\": null, \"max\": null, \"min\": 115, \"range\": \"10-30..11-12\"}]",
+      "source": "detected",
+      "note": "Detected by comparing against the 2026-08-30 snapshot. applies_to corrected 2026-09-07: the original entry also listed 08-17..08-31, which did not change \u2014 it merely scrolled out of the diagnose_no_bookings ~60-day reporting window. The only real edit is the new 10-30..11-12 min 115 profile. changed_profile_ranges() now applies that window test itself.",
+      "applies_to": [
+        "10-30..11-12"
+      ]
+    },
+    {
+      "date": "2026-09-06",
+      "listing": "casa",
+      "field": "seasonal_profiles",
+      "from": "[{\"base\": null, \"max\": null, \"min\": null, \"range\": \"08-01..08-31\"}, {\"base\": 200, \"max\": null, \"min\": 150, \"range\": \"09-01..09-30\"}, {\"base\": 200, \"max\": null, \"min\": 150, \"range\": \"10-01..10-31\"}]",
+      "to": "[{\"base\": 200, \"max\": 140, \"min\": 130, \"range\": \"09-01..09-25\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"10-01..10-31\"}]",
+      "source": "detected",
+      "note": "Detected by comparing against the 2026-08-30 snapshot. applies_to corrected 2026-09-07: the original entry also listed 08-01..08-31, which did not change \u2014 it scrolled out of the ~60-day reporting window. Real edits: the September profile narrowed to 09-01..09-25 and gained min 130 / max 140 (base above max is deliberate, see known_quirks), and the October profile's base/min were cleared.",
+      "applies_to": [
+        "09-01..09-25",
+        "09-01..09-30",
+        "10-01..10-31"
+      ]
+    },
+    {
+      "date": "2026-09-06",
+      "listing": "casa",
+      "field": "max",
+      "from": 1200.0,
+      "to": null,
+      "source": "detected",
+      "note": "Detected by comparing against the 2026-08-30 snapshot. CONFIRMED 2026-09-07: Scott says he removed the Casa max deliberately, and get_listing_data returns max=null (base 250, min 180, recommended 271). This is a real change, not a read gap. Note it was never binding \u2014 max_price_hit_days was 0/61 \u2014 so it moves no price today, but it does remove the ceiling for Christmas and Easter.",
+      "applies_to": null
+    },
+    {
+      "date": "2026-08-29",
+      "listing": "casa",
+      "field": "base",
+      "from": 270.0,
+      "to": 250.0,
+      "source": "manual",
+      "note": "Lowered after reviewing the dashboard \u2014 Casa pacing behind across January, February and Easter. PriceLabs still recommends 270. Settle window closes 2026-09-19; this is the lever that gates every Casa recommendation until then."
+    },
+    {
+      "date": "2026-08-28",
+      "listing": "casa",
+      "field": "seasonal_profiles",
+      "from": "Sep 1-30 and Oct 1-31: base $250, min $170",
+      "to": "Sep 1-30 and Oct 1-31: base $200, min $150",
+      "source": "manual",
+      "note": "Lowered both shoulder-season profiles alongside the base rate. Web UI only \u2014 not writable via the API. Casa is now hitting its min price on 52 of the next 61 days, so the floor is setting the price most days rather than the algorithm.",
+      "applies_to": [
+        "09-01..09-30",
+        "10-01..10-31"
+      ]
+    }
+  ]
+}
