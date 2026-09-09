@@ -1,0 +1,35 @@
+# This page is public only because GitHub Pages cannot serve a private one.
+#
+# Search engines are deliberately ALLOWED to fetch it: the page carries
+# <meta name="robots" content="noindex ...">, and a crawler can only honour a tag it
+# is permitted to read. Blocking Googlebot here would be self-defeating -- a URL it
+# cannot fetch can still be listed as a bare link if anything ever points at it.
+#
+# AI training and answer-engine crawlers are asked to stay out. The ones below all
+# document that they respect this file. Nothing here stops a scraper that does not.
+
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: PerplexityBot
+User-agent: Bytespider
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: FacebookBot
+User-agent: meta-externalagent
+User-agent: Amazonbot
+User-agent: omgili
+User-agent: YouBot
+User-agent: ImagesiftBot
+User-agent: Timpibot
+User-agent: PetalBot
+Disallow: /
+
+User-agent: *
+Disallow:
