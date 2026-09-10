@@ -80,6 +80,36 @@
       ]
     },
     {
+      "date": "2026-09-10",
+      "listing": "casa",
+      "field": "seasonal_profiles",
+      "from": "[{\"base\": null, \"max\": null, \"min\": null, \"range\": \"01-01..01-04\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"01-05..01-31\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"02-01..02-28\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"03-01..03-18\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"03-19..04-03\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"04-04..04-30\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"05-01..05-31\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"06-01..06-30\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"07-01..07-31\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"08-01..08-31\"}, {\"base\": 200, \"max\": 140, \"min\": 130, \"range\": \"09-01..09-25\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"10-01..10-31\"}, {\"base\": 250, \"max\": null, \"min\": 180, \"range\": \"11-01..11-19\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"11-20..11-29\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"11-30..12-17\"}, {\"base\": null, \"max\": null, \"min\": null, \"range\": \"12-18..12-31\"}]",
+      "to": "[{\"base\": null, \"max\": null, \"min\": 500, \"range\": \"01-01..01-02\"}, {\"base\": null, \"max\": null, \"min\": 350, \"range\": \"01-03..01-31\"}, {\"base\": null, \"max\": null, \"min\": 380, \"range\": \"02-01..02-28\"}, {\"base\": null, \"max\": null, \"min\": 360, \"range\": \"03-01..04-04\"}, {\"base\": null, \"max\": null, \"min\": 300, \"range\": \"04-05..04-30\"}, {\"base\": null, \"max\": null, \"min\": 190, \"range\": \"05-01..05-31\"}, {\"base\": null, \"max\": null, \"min\": 190, \"range\": \"06-01..06-30\"}, {\"base\": null, \"max\": null, \"min\": 220, \"range\": \"07-01..07-31\"}, {\"base\": null, \"max\": null, \"min\": 190, \"range\": \"08-01..08-31\"}, {\"base\": 200, \"max\": 140, \"min\": 130, \"range\": \"09-01..09-25\"}, {\"base\": null, \"max\": null, \"min\": 130, \"range\": \"10-01..10-31\"}, {\"base\": null, \"max\": null, \"min\": 220, \"range\": \"11-01..11-19\"}, {\"base\": null, \"max\": null, \"min\": 330, \"range\": \"11-20..11-29\"}, {\"base\": null, \"max\": null, \"min\": 250, \"range\": \"11-30..12-17\"}, {\"base\": null, \"max\": null, \"min\": 500, \"range\": \"12-18..12-31\"}]",
+      "source": "detected",
+      "note": "Detected by comparing against the 2026-09-09 snapshot.",
+      "applies_to": [
+        "01-01..01-02",
+        "01-01..01-04",
+        "01-03..01-31",
+        "01-05..01-31",
+        "02-01..02-28",
+        "03-01..03-18",
+        "03-01..04-04",
+        "03-19..04-03",
+        "04-04..04-30",
+        "04-05..04-30",
+        "05-01..05-31",
+        "06-01..06-30",
+        "07-01..07-31",
+        "08-01..08-31",
+        "10-01..10-31",
+        "11-01..11-19",
+        "11-20..11-29",
+        "11-30..12-17",
+        "12-18..12-31"
+      ]
+    },
+    {
       "date": "2026-09-06",
       "listing": "casita",
       "field": "seasonal_profiles",
