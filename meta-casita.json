@@ -1,10 +1,10 @@
 {
   "listing_key": "casita",
   "compset": "ABB: 2 Bedrooms",
-  "compset_n_listings": 296,
-  "compset_median_price": "170.75",
+  "compset_n_listings": 294,
+  "compset_median_price": "169.0",
   "rows": 540,
-  "date_first": "2026-03-21",
-  "date_last": "2027-09-11",
+  "date_first": "2026-03-22",
+  "date_last": "2027-09-12",
   "source_payload": "neighborhood-casita.json"
 }
