@@ -2,6 +2,15 @@
   "settle_days": 21,
   "changes": [
     {
+      "date": "2026-09-26",
+      "listing": "casa",
+      "field": "base",
+      "from": 250.0,
+      "to": 240.0,
+      "source": "detected",
+      "note": "Detected by comparing against the 2026-09-25 snapshot."
+    },
+    {
       "date": "2026-09-25",
       "listing": "casita",
       "field": "seasonal_profiles",
