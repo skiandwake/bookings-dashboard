@@ -2,9 +2,9 @@
   "listing_key": "casa",
   "compset": "ABB Comp: 3BR Houses Similar or slightly less nice than Casa created 20260815",
   "compset_n_listings": 21,
-  "compset_median_price": "323.0",
+  "compset_median_price": "322.5",
   "rows": 540,
-  "date_first": "2026-03-31",
-  "date_last": "2027-09-21",
+  "date_first": "2026-04-01",
+  "date_last": "2027-09-22",
   "source_payload": "neighborhood-casa.json"
 }
