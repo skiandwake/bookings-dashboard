@@ -184,5 +184,12 @@
     "compset_casa": "ABB Comp: 3BR Houses Similar or slightly less nice than Casa created 20260815",
     "casita": 0.705,
     "compset_casita": "ABB: 2 Bedrooms"
+  },
+  {
+    "date": "2026-10-02",
+    "casa": 1.069,
+    "compset_casa": "ABB Comp: 3BR Houses Similar or slightly less nice than Casa created 20260815",
+    "casita": 0.671,
+    "compset_casita": "ABB: 2 Bedrooms"
   }
 ]
