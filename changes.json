@@ -2,6 +2,15 @@
   "settle_days": 21,
   "changes": [
     {
+      "date": "2026-10-03",
+      "listing": "casa",
+      "field": "base",
+      "from": 240.0,
+      "to": 230.0,
+      "source": "detected",
+      "note": "Detected by comparing against the 2026-10-02 snapshot."
+    },
+    {
       "date": "2026-09-26",
       "listing": "casa",
       "field": "base",
