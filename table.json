@@ -25,7 +25,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": true,
-    "implied_premium": 13.65600579620141,
+    "implied_premium": 16.36363636363636,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -55,7 +55,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 12.432432432432439,
+    "implied_premium": 13.77551020408163,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -85,7 +85,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 46.97885196374622,
+    "implied_premium": 46.40122511485452,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -115,7 +115,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 6.183745583038869,
+    "implied_premium": 4.4883303411131115,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -145,7 +145,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 8.732921073677335,
+    "implied_premium": 5.216785509384492,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -175,7 +175,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 13.306569585743722,
+    "implied_premium": 10.851655542468253,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -205,7 +205,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 13.4453781512605,
+    "implied_premium": 12.847965738758038,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -235,7 +235,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 33.54037267080745,
+    "implied_premium": 33.225806451612904,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -265,7 +265,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 34.47752904989747,
+    "implied_premium": 38.39478605014253,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -295,7 +295,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 31.472081218274116,
+    "implied_premium": 29.262086513994912,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -325,7 +325,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 18.32061068702291,
+    "implied_premium": 15.267175572519086,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -355,7 +355,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 43.283208020050125,
+    "implied_premium": 45.19367448471927,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -385,7 +385,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 39.06810035842294,
+    "implied_premium": 39.33823529411764,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -415,7 +415,7 @@
     "suppressed": true,
     "low_sample": true,
     "short_bucket": false,
-    "implied_premium": 46.45159585711267,
+    "implied_premium": 49.61825543955509,
     "thin_base": false,
     "coverage": 0.47368421052631576
   },
@@ -445,7 +445,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": true,
-    "implied_premium": 13.65600579620141,
+    "implied_premium": 16.36363636363636,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -475,7 +475,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 12.432432432432439,
+    "implied_premium": 13.77551020408163,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -505,7 +505,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 46.97885196374622,
+    "implied_premium": 46.40122511485452,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -535,7 +535,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 6.183745583038869,
+    "implied_premium": 4.4883303411131115,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -565,7 +565,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 8.732921073677335,
+    "implied_premium": 5.216785509384492,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -595,7 +595,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 13.306569585743722,
+    "implied_premium": 10.851655542468253,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -625,7 +625,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 13.4453781512605,
+    "implied_premium": 12.847965738758038,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -655,7 +655,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 33.54037267080745,
+    "implied_premium": 33.225806451612904,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -685,7 +685,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 34.47752904989747,
+    "implied_premium": 38.39478605014253,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -715,7 +715,7 @@
     "suppressed": false,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 31.472081218274116,
+    "implied_premium": 29.262086513994912,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -745,7 +745,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 18.32061068702291,
+    "implied_premium": 15.267175572519086,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -775,7 +775,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 43.283208020050125,
+    "implied_premium": 45.19367448471927,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -805,7 +805,7 @@
     "suppressed": true,
     "low_sample": false,
     "short_bucket": false,
-    "implied_premium": 39.06810035842294,
+    "implied_premium": 39.33823529411764,
     "thin_base": false,
     "coverage": 1.0
   },
@@ -835,7 +835,7 @@
     "suppressed": true,
     "low_sample": true,
     "short_bucket": false,
-    "implied_premium": 46.45159585711267,
+    "implied_premium": 49.61825543955509,
     "thin_base": false,
     "coverage": 0.47368421052631576
   }
